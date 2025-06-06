@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسالة حب إلى مريم 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-part {
+            display: none;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+            line-height: 1.8;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .message-part.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hearts {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .next-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-family: 'Amiri', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .next-button:hover::before {
+            left: 100%;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .next-button:active {
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 182, 193, 0.3);
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            width: 0;
+            transition: width 0.5s ease;
+            border-radius: 2px;
+        }
+
+        .final-message {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            text-align: center;
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="instructions" id="instructions">
+            <p>هنلعب لعبه 😍 كل ما تخلصي قراءة دوسي ❤️ "بحبك يا برهومي" ❤️ علشان تكملي الرسالة 🥰</p>
+            <button class="next-button" onclick="startMessage()">ابدئي اللعبة 💌</button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="message-part" id="part1">
+            <div class="hearts">💗💗💗</div>
+            <p>صباح الخير</p>
+            <p>مسدچ طويله ؟!</p>
+            <p>مورنينج تيكست دي ولا مسدچ العيد ؟</p>
+            <div class="hearts">💗</div>
+        </div>
+
+        <div class="message-part" id="part2">
+            <div class="hearts">🌹💗🌹</div>
+            <p>كل سنه وانتي معايا يمريم 💗💗</p>
+            <p>بجد انتي أحسن حد انا قابلته وممكن أقابله ف حياتي</p>
+            <p>وبجد اكتر حد معجب بيكي وفخور ب كل حاجه بتعمليها</p>
+            <p>وجمبك وبدعمك علي طول</p>
+            <div class="hearts">💗💗</div>
+        </div>
+
+        <div class="message-part" id="part3">
+            <div class="hearts">❤️💕❤️</div>
+            <p>وبحبك اوي يمريم وبحب كل حاجه فيكي</p>
+            <p>كل حاجه كل حاجه 😂</p>
+            <p>بحب انك بتفهميني وبحب حبك ليا يمريم</p>
+            <p>وبحب انك معايا دايما مختلفه معايا</p>
+            <div class="hearts">💗💗💗</div>
+        </div>
+
+        <div class="message-part" id="part4">
+            <div class="hearts">🥰💗🥰</div>
+            <p>بتبقي مريومي الوش الي محدش بيشوفه من مريم غيري</p>
+            <p>بحبك وانتي كتكوته كده وعسوله موت</p>
+            <p>بحب طريقتك ف التعامل مع أهلك وانك حنينه موت</p>
+            <p>بحب وقفتك جمبي لما ببقي فموقف صعب</p>
+            <div class="hearts">💕💕</div>
+        </div>
+
+        <div class="message-part" id="part5">
+            <div class="hearts">✨💗✨</div>
+            <p>بجد بحب حبك ليا وانك دايما بتماتشي ماي ڤايب ف كل حاجه</p>
+            <p>حرفيا كل حاجه الهزار والاهتمام وطريقه الحب</p>
+            <p>والاهتمام بالتفاصيل وأننا بنحب نحكي لبعض</p>
+            <p>وبنحب نعرف كل حاجه عن بعض</p>
+            <div class="hearts">💗💗💗</div>
+        </div>
+
+        <div class="message-part" id="part6">
+            <div class="hearts">🌟💕🌟</div>
+            <p>وفعلا بنرتاح لبعض وبنحب نتكلم سوا ف كل حاجه</p>
+            <p>ونعمل مع بعض كل حاجه طول عمرنا لبعض</p>
+            <p>بجد يمريم</p>
+            <div class="final-message">From day one you are the one 💗</div>
+            <div class="hearts">💗❤️💕❤️💗</div>
+        </div>
+
+        <button class="next-button" id="nextButton" onclick="nextPart()">
+            ❤️ بحبك يا برهومي ❤️
+        </button>
+
+        <audio id="loveSong" src="song.mp3" preload="auto"></audio>
+    </div>
+
+    <script>
+        let currentPart = 1;
+        const totalParts = 6;
+
+        function startMessage() {
+            document.getElementById("instructions").style.display = "none";
+            document.getElementById("part1").classList.add("active");
+            document.getElementById("nextButton").style.display = "inline-block"; // Ensure button is block or inline-block
+            document.getElementById('progressFill').style.width = (1 / totalParts) * 100 + '%';
+        }
+
+        function nextPart() {
+            if (currentPart < totalParts) {
+                document.getElementById(`part${currentPart}`).classList.remove('active');
+                currentPart++;
+                setTimeout(() => {
+                    document.getElementById(`part${currentPart}`).classList.add('active');
+
+                    // Check if it's the last part to play the song
+                    if (currentPart === totalParts) {
+                        const song = document.getElementById('loveSong');
+                        if (song) {
+                            song.currentTime = 113; // 1 minute and 53 seconds (1*60 + 53)
+                            song.play().catch(error => {
+                                // Autoplay was prevented.
+                                // You might want to log this or inform the user in some way if needed.
+                                console.error("Audio play failed:", error);
+                                // Optionally, you could display a manual play button here
+                                // if autoplay fails and you want to give the user control.
+                            });
+                        }
+                    }
+                }, 200); // Song attempts to play shortly after the last part is visible.
+
+                const progress = (currentPart / totalParts) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+
+                if (currentPart === totalParts) {
+                    // Hide the 'Next' button after the last part is shown and song starts
+                    setTimeout(() => {
+                        document.getElementById('nextButton').style.display = 'none';
+                    }, 1000); // Delay to ensure user sees the last part before button disappears
+                }
+            }
+        }
+
+        // إخفاء أول رسالة والزر عند بداية الصفحة
+        window.onload = function () {
+            document.getElementById("part1").classList.remove("active");
+            document.getElementById("nextButton").style.display = "none";
+        }
+    </script>
+</body>
+</html>
