@@ -51,6 +51,9 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
+            display: flex; /* Added for better centering of contents */
+            flex-direction: column; /* Added for better centering of contents */
+            align-items: center; /* Added for better centering of contents */
         }
 
         .message-part {
@@ -98,6 +101,7 @@
             font-weight: bold;
             position: relative;
             overflow: hidden;
+            margin-top: 20px; /* Added margin to separate from content */
         }
 
         .next-button::before {
@@ -164,9 +168,10 @@
 <body>
     <div class="container">
         <div class="instructions" id="instructions">
-            <p>هنلعب لعبه 😍 كل ما تخلصي قراءة دوسي ❤️ "بحبك يا برهومي" ❤️ علشان تكملي الرسالة 🥰</p> <button class="next-button" onclick="startMessage()">ابدئي اللعبة 💌</button>
+            <p>هنلعب لعبه 😍 كل ما تخلصي قراءة دوسي ❤️ "بحبك يا برهومي" ❤️ علشان تكملي الرسالة 🥰</p>
+            <button class="next-button" onclick="startMessage()">ابدئي اللعبة 💌</button>
         </div>
-        <div class="progress-bar">
+        <div class="progress-bar" style="display: none;" id="progressBarContainer">
             <div class="progress-fill" id="progressFill"></div>
         </div>
         <div class="message-part" id="part1">
@@ -215,18 +220,22 @@
             <p>بجد يمريم</p>
             <div class="final-message">From day one you are the one 💗</div>
             <div class="hearts">💗❤️💕❤️💗</div>
-        </div> <button class="next-button" id="nextButton" onclick="nextPart()"> ❤️ بحبك يا برهومي ❤️ </button> <audio id="loveSong" src="song.mp3" preload="auto"></audio>
+        </div>
+        <button class="next-button" id="nextButton" style="display: none;" onclick="nextPart()"> ❤️ بحبك يا برهومي ❤️ </button>
+        <audio id="loveSong" src="song.mp3" preload="auto"></audio>
     </div>
     <script>
-        let currentPart = 1;
+        let currentPart = 0; // Start at 0 to make initial part setup easier
         const totalParts = 6;
         let audioFadeInterval;
 
         function startMessage() {
             document.getElementById("instructions").style.display = "none";
-            document.getElementById("part1").classList.add("active");
+            document.getElementById("progressBarContainer").style.display = "block"; // Show progress bar
             document.getElementById("nextButton").style.display = "inline-block";
-            document.getElementById('progressFill').style.width = (1 / totalParts) * 100 + '%';
+            currentPart = 1; // Set to 1 for the first message part
+            document.getElementById(`part${currentPart}`).classList.add("active");
+            document.getElementById('progressFill').style.width = (currentPart / totalParts) * 100 + '%';
         }
 
         function nextPart() {
@@ -234,11 +243,52 @@
                 document.getElementById(`part${currentPart}`).classList.remove('active');
                 currentPart++;
                 setTimeout(() => {
-                            document.getElementById(`part${currentPart}`).classList.add('active');
-                            if (currentPart === totalParts) {
-                                const song = document.getElementById('loveSong');
-                                if (song) {
-                                    song.currentTime = 113; // Set starting time song.volume = 0; // Start with volume at 0 song.play().then(() => { // Start fading in let volume = 0; const fadeDuration = 3000; // 3 seconds fade in const fadeStep = 0.01; const intervalTime = fadeDuration / (1 / fadeStep); audioFadeInterval = setInterval(() => { if (volume < 1) { volume += fadeStep; if (volume > 1) volume = 1; // Cap at 1 song.volume = volume; } else { clearInterval(audioFadeInterval); } }, intervalTime); }).catch(error => { console.error("Audio play failed:", error); }); } } }, 200); const progress = (currentPart / totalParts) * 100; document.getElementById('progressFill').style.width = progress + '%'; if (currentPart === totalParts) { setTimeout(() => { document.getElementById('nextButton').style.display = 'none'; }, 1000); } } } window.onload = function () { document.getElementById("part1").classList.remove("active"); document.getElementById("nextButton").style.display = "none"; } 
+                    document.getElementById(`part${currentPart}`).classList.add('active');
+                    const progress = (currentPart / totalParts) * 100;
+                    document.getElementById('progressFill').style.width = progress + '%';
+
+                    if (currentPart === totalParts) {
+                        const song = document.getElementById('loveSong');
+                        if (song) {
+                            song.currentTime = 113; // Set starting time
+                            song.volume = 0; // Start with volume at 0
+                            song.play().then(() => {
+                                let volume = 0;
+                                const fadeDuration = 3000; // 3 seconds fade in
+                                const fadeStep = 0.01;
+                                const intervalTime = fadeDuration / (1 / fadeStep);
+                                audioFadeInterval = setInterval(() => {
+                                    if (volume < 1) {
+                                        volume += fadeStep;
+                                        if (volume > 1) volume = 1; // Cap at 1
+                                        song.volume = volume;
+                                    } else {
+                                        clearInterval(audioFadeInterval);
+                                    }
+                                }, intervalTime);
+                            }).catch(error => {
+                                console.error("Audio play failed:", error);
+                            });
+                        }
+                        // Hide the button after a delay for the final message
+                        setTimeout(() => {
+                            document.getElementById('nextButton').style.display = 'none';
+                        }, 1000);
+                    }
+                }, 200);
+            }
+        }
+
+        // Initialize the page on load
+        window.onload = function () {
+            // Ensure all message parts are hidden initially
+            for (let i = 1; i <= totalParts; i++) {
+                document.getElementById(`part${i}`).classList.remove('active');
+            }
+            document.getElementById("instructions").style.display = "block"; // Show instructions
+            document.getElementById("nextButton").style.display = "none"; // Hide next button initially
+            document.getElementById("progressBarContainer").style.display = "none"; // Hide progress bar initially
+        }
     </script>
 </body>
 
