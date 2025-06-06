@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رسالة حب إلى مريم 💗</title>
+    <title>ForMyPrincessMariyoumy</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 
@@ -26,9 +27,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
@@ -63,6 +72,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -150,17 +160,15 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="instructions" id="instructions">
-            <p>هنلعب لعبه 😍 كل ما تخلصي قراءة دوسي ❤️ "بحبك يا برهومي" ❤️ علشان تكملي الرسالة 🥰</p>
-            <button class="next-button" onclick="startMessage()">ابدئي اللعبة 💌</button>
+            <p>هنلعب لعبه 😍 كل ما تخلصي قراءة دوسي ❤️ "بحبك يا برهومي" ❤️ علشان تكملي الرسالة 🥰</p> <button class="next-button" onclick="startMessage()">ابدئي اللعبة 💌</button>
         </div>
-
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-
         <div class="message-part" id="part1">
             <div class="hearts">💗💗💗</div>
             <p>صباح الخير</p>
@@ -168,7 +176,6 @@
             <p>مورنينج تيكست دي ولا مسدچ العيد ؟</p>
             <div class="hearts">💗</div>
         </div>
-
         <div class="message-part" id="part2">
             <div class="hearts">🌹💗🌹</div>
             <p>كل سنه وانتي معايا يمريم 💗💗</p>
@@ -177,7 +184,6 @@
             <p>وجمبك وبدعمك علي طول</p>
             <div class="hearts">💗💗</div>
         </div>
-
         <div class="message-part" id="part3">
             <div class="hearts">❤️💕❤️</div>
             <p>وبحبك اوي يمريم وبحب كل حاجه فيكي</p>
@@ -186,7 +192,6 @@
             <p>وبحب انك معايا دايما مختلفه معايا</p>
             <div class="hearts">💗💗💗</div>
         </div>
-
         <div class="message-part" id="part4">
             <div class="hearts">🥰💗🥰</div>
             <p>بتبقي مريومي الوش الي محدش بيشوفه من مريم غيري</p>
@@ -195,7 +200,6 @@
             <p>بحب وقفتك جمبي لما ببقي فموقف صعب</p>
             <div class="hearts">💕💕</div>
         </div>
-
         <div class="message-part" id="part5">
             <div class="hearts">✨💗✨</div>
             <p>بجد بحب حبك ليا وانك دايما بتماتشي ماي ڤايب ف كل حاجه</p>
@@ -204,7 +208,6 @@
             <p>وبنحب نعرف كل حاجه عن بعض</p>
             <div class="hearts">💗💗💗</div>
         </div>
-
         <div class="message-part" id="part6">
             <div class="hearts">🌟💕🌟</div>
             <p>وفعلا بنرتاح لبعض وبنحب نتكلم سوا ف كل حاجه</p>
@@ -212,23 +215,17 @@
             <p>بجد يمريم</p>
             <div class="final-message">From day one you are the one 💗</div>
             <div class="hearts">💗❤️💕❤️💗</div>
-        </div>
-
-        <button class="next-button" id="nextButton" onclick="nextPart()">
-            ❤️ بحبك يا برهومي ❤️
-        </button>
-
-        <audio id="loveSong" src="song.mp3" preload="auto"></audio>
+        </div> <button class="next-button" id="nextButton" onclick="nextPart()"> ❤️ بحبك يا برهومي ❤️ </button> <audio id="loveSong" src="song.mp3" preload="auto"></audio>
     </div>
-
     <script>
         let currentPart = 1;
         const totalParts = 6;
+        let audioFadeInterval;
 
         function startMessage() {
             document.getElementById("instructions").style.display = "none";
             document.getElementById("part1").classList.add("active");
-            document.getElementById("nextButton").style.display = "inline-block"; // Ensure button is block or inline-block
+            document.getElementById("nextButton").style.display = "inline-block";
             document.getElementById('progressFill').style.width = (1 / totalParts) * 100 + '%';
         }
 
@@ -237,41 +234,12 @@
                 document.getElementById(`part${currentPart}`).classList.remove('active');
                 currentPart++;
                 setTimeout(() => {
-                    document.getElementById(`part${currentPart}`).classList.add('active');
-
-                    // Check if it's the last part to play the song
-                    if (currentPart === totalParts) {
-                        const song = document.getElementById('loveSong');
-                        if (song) {
-                            song.currentTime = 113; // 1 minute and 53 seconds (1*60 + 53)
-                            song.play().catch(error => {
-                                // Autoplay was prevented.
-                                // You might want to log this or inform the user in some way if needed.
-                                console.error("Audio play failed:", error);
-                                // Optionally, you could display a manual play button here
-                                // if autoplay fails and you want to give the user control.
-                            });
-                        }
-                    }
-                }, 200); // Song attempts to play shortly after the last part is visible.
-
-                const progress = (currentPart / totalParts) * 100;
-                document.getElementById('progressFill').style.width = progress + '%';
-
-                if (currentPart === totalParts) {
-                    // Hide the 'Next' button after the last part is shown and song starts
-                    setTimeout(() => {
-                        document.getElementById('nextButton').style.display = 'none';
-                    }, 1000); // Delay to ensure user sees the last part before button disappears
-                }
-            }
-        }
-
-        // إخفاء أول رسالة والزر عند بداية الصفحة
-        window.onload = function () {
-            document.getElementById("part1").classList.remove("active");
-            document.getElementById("nextButton").style.display = "none";
-        }
+                            document.getElementById(`part${currentPart}`).classList.add('active');
+                            if (currentPart === totalParts) {
+                                const song = document.getElementById('loveSong');
+                                if (song) {
+                                    song.currentTime = 113; // Set starting time song.volume = 0; // Start with volume at 0 song.play().then(() => { // Start fading in let volume = 0; const fadeDuration = 3000; // 3 seconds fade in const fadeStep = 0.01; const intervalTime = fadeDuration / (1 / fadeStep); audioFadeInterval = setInterval(() => { if (volume < 1) { volume += fadeStep; if (volume > 1) volume = 1; // Cap at 1 song.volume = volume; } else { clearInterval(audioFadeInterval); } }, intervalTime); }).catch(error => { console.error("Audio play failed:", error); }); } } }, 200); const progress = (currentPart / totalParts) * 100; document.getElementById('progressFill').style.width = progress + '%'; if (currentPart === totalParts) { setTimeout(() => { document.getElementById('nextButton').style.display = 'none'; }, 1000); } } } window.onload = function () { document.getElementById("part1").classList.remove("active"); document.getElementById("nextButton").style.display = "none"; } 
     </script>
 </body>
+
 </html>
